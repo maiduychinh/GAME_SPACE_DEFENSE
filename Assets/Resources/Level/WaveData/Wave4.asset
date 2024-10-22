@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8d16e2f769fa5a4788b44313751c662, type: 3}
+  m_Name: Wave4
+  m_EditorClassIdentifier: 
+  rounds:
+  - enemyTypes:
+    - {fileID: 11400000, guid: b40e862003f560942b43cdc327cee55c, type: 2}
+    enemyCounts: 04000000
+  - enemyTypes:
+    - {fileID: 11400000, guid: d681091c0361a464d882361f3d7898e3, type: 2}
+    enemyCounts: 06000000
+  - enemyTypes:
+    - {fileID: 11400000, guid: 0b4e79dfd8ee387409240354adc1046c, type: 2}
+    enemyCounts: 08000000
