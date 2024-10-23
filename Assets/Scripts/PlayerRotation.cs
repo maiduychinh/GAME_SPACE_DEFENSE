@@ -1,4 +1,5 @@
 ﻿
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,7 +20,7 @@ public class PlayerRotation : MonoBehaviour
     public float orbitRadius = 2f; // Bán kính quỹ đạo
     public float orbitSpeed = 50f; // Tốc độ quay
 
-    public int currentSkillLevel =0; // Cấp độ hiện tại
+    public int currentSkillLevel = 0; // Cấp độ hiện tại
 
     void Start()
     {
@@ -70,18 +71,36 @@ public class PlayerRotation : MonoBehaviour
 
         return nearestEnemy; // Trả về kẻ thù gần nhất
     }
+
     public void Shoot()
     {
         // Kiểm tra chỉ số currentSkillLevel
+        if (UiController.instance == null)
+        {
+            Debug.LogError("UiController.instance is null!");
+            return;
+        }
+
+        if (UiController.instance.PauseLevel == null)
+        {
+            Debug.LogError("PauseLevel is null!");
+            return;
+        }
+
         if (currentSkillLevel < 0 || currentSkillLevel >= UiController.instance.PauseLevel.skill3Levels.Length)
         {
-            Debug.Log(currentSkillLevel);
-            Debug.Log(UiController.instance.PauseLevel.skill3Levels.Length);
+            Debug.LogError("Invalid skill level!");
             return; // Thoát nếu không hợp lệ
         }
 
         // Lấy số lượng đạn từ Skill hiện tại
         int quantityBullet = UiController.instance.PauseLevel.skill3Levels[currentSkillLevel].quantityBullet;
+
+        if (closestEnemy == null)
+        {
+            Debug.LogError("No enemy found to shoot at!");
+            return;
+        }
 
         float spacing = 1f; // Khoảng cách giữa các viên đạn
         Vector3 direction = (closestEnemy.position - bulletSpawnPoint.position).normalized; // Hướng đến kẻ thù
@@ -94,6 +113,7 @@ public class PlayerRotation : MonoBehaviour
             bullet.GetComponent<Rigidbody>().velocity = direction * bulletSpeed; // Thiết lập vận tốc viên đạn
         }
     }
+
     public void OnEnemyKilled(EnemyData enemyData)
     {
         levelManager.GainExperience(enemyData.exp); // Cộng kinh nghiệm cho người chơi từ EnemyData
@@ -128,4 +148,3 @@ public class PlayerRotation : MonoBehaviour
         }
     }
 }
-

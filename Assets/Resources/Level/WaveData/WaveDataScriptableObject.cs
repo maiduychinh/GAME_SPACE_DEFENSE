@@ -5,5 +5,6 @@
 [System.Serializable]
 public class WaveDataScriptableObject : ScriptableObject
 {
-    public RoundData[] rounds; 
+    public EnemyData[] enemyTypes; // Loại enemy xuất hiện trong wave
+    public int[] enemyCounts; // Số lượng enemy tương ứng
 }

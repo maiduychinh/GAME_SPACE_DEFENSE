@@ -127,4 +127,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb5b19018be5dc848a77ac0601171621, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyData: {fileID: 0}
+  enemyData: {fileID: 11400000, guid: 16025028da43b6f43a34f1d75ac2eb3f, type: 2}
+  damageTextPrefab: {fileID: 1965492623807059698, guid: 20a8c54e8552ab245ac1986152fd8e3c, type: 3}
+  textOffsetY: 2

@@ -57,6 +57,7 @@ public class DamageZone : MonoBehaviour
 
     private void UpdateScale()
     {
-        transform.localScale = new Vector3(radius/2, radius/2, radius/2);
+        float a = 0.01f;
+        transform.localScale = new Vector3(radius, a, radius);
     }
 }

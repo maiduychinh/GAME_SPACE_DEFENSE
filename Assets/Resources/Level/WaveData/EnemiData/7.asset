@@ -15,6 +15,6 @@ MonoBehaviour:
   enemyName: 7
   health: 40
   damage: 10
-  exp: 30
+  exp: 50
   speed: 7.5
   enemyPrefab: {fileID: 8068444997255710172, guid: 70748f94866711c4aaa7b6e17402a0f4, type: 3}

@@ -1,59 +1,4 @@
-﻿/*
-using UnityEngine.UI;
-using System.Collections;
-using UnityEngine;
-
-public class PlayerHealth : MonoBehaviour
-{
-    public float maxHealth = 100f;
-    private float _curentHealth;
-
-    [SerializeField] private HealthBar _healthBar;
-
-    void Start()
-    {
-        // Khởi tạo máu hiện tại bằng giá trị máu tối đa
-        _curentHealth = maxHealth;
-        _healthBar.UpdateHealthbarPlayer(maxHealth, _curentHealth);
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        Enemi enemy = collision.gameObject.GetComponent<Enemi>();
-        if (enemy != null)
-        {
-            // Trừ máu ngay lập tức khi va chạm với enemy
-            TakeDamage(enemy.enemyData.damage);
-        }
-    }
-
-    void TakeDamage(float damage)
-    {
-        _curentHealth -= damage; // Không gán lại _curentHealth bằng maxHealth
-        Debug.Log($"Player took {damage} damage, remaining health: {_curentHealth}");
-        _healthBar.UpdateHealthbarPlayer(maxHealth, _curentHealth);
-        if (_curentHealth <= 0)
-        {
-            Die();
-        }
-    }
-    public void CreaseHealth()
-    {
-        _curentHealth += 20;
-        maxHealth += 20;
-        _healthBar.UpdateHealthbarPlayer(maxHealth, _curentHealth);
-        Debug.Log($"máu còn{ _curentHealth} / {maxHealth }");
-    }
-
-    void Die()
-    {
-        Debug.Log("Player has died!");
-        Destroy(gameObject);
-        GameController.instance.DoOver();
-
-    }
-}
-*/
+﻿
 using UnityEngine.UI;
 using System.Collections;
 using UnityEngine;
@@ -82,20 +27,11 @@ public class PlayerHealth : MonoBehaviour
         if (enemy != null)
         {
             // Trừ máu ngay lập tức khi va chạm với enemy
-            TakeDamage(enemy.enemyData.damage);
+           TakeDamage(enemy.enemyData.damage);
         }
     }
 
-    /*void TakeDamage(float damage)
-    {
-        _curentHealth -= damage; // Không gán lại _curentHealth bằng maxHealth
-        Debug.Log($"Player took {damage} damage, remaining health: {_curentHealth}");
-        _healthBar.UpdateHealthbarPlayer(maxHealth, _curentHealth);
-        if (_curentHealth <= 0)
-        {
-            Die();
-        }
-    }*/
+   
     void TakeDamage(float damage)
     {
         // Tính toán lượng sát thương sau khi trừ giáp

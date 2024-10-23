@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2fb44d044d0340409dc321626bf5291, type: 3}
   m_Name: Skill4_Level5
   m_EditorClassIdentifier: 
-  Radius: 7
-  damagePerSecond: 20
+  Radius: 15
+  damagePerSecond: 30

@@ -78,7 +78,6 @@
     <Compile Include="Assets\Scripts\GameController.cs" />
     <Compile Include="Assets\Scripts\Skill\ScriptSkill4.cs" />
     <Compile Include="Assets\Resources\Level\WaveData\WaveDataScriptableObject.cs" />
-    <Compile Include="Assets\Resources\Level\RounData\RoundData.cs" />
     <Compile Include="Assets\Scripts\Bar\HealthBar.cs" />
     <Compile Include="Assets\Scripts\Object\Bullet.cs" />
     <Compile Include="Assets\Scripts\PlayerHealth.cs" />

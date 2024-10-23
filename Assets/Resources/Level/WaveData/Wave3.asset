@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8d16e2f769fa5a4788b44313751c662, type: 3}
   m_Name: Wave3
   m_EditorClassIdentifier: 
-  rounds:
-  - enemyTypes:
-    - {fileID: 11400000, guid: 3bc7a0f7eed55fe418f6b23b9906a272, type: 2}
-    enemyCounts: 05000000
-  - enemyTypes:
-    - {fileID: 11400000, guid: ce39d92e7879ce2439852b250950a9dc, type: 2}
-    enemyCounts: 05000000
+  enemyTypes:
+  - {fileID: 11400000, guid: 8028d093a9012d7478395d39aa976d85, type: 2}
+  - {fileID: 11400000, guid: d7e9544bc3ca5d247834715d37a3b6d0, type: 2}
+  - {fileID: 11400000, guid: d081656a1c5df2d4099eb00f11acafe3, type: 2}
+  - {fileID: 11400000, guid: 3bc7a0f7eed55fe418f6b23b9906a272, type: 2}
+  enemyCounts: 03000000040000000500000005000000

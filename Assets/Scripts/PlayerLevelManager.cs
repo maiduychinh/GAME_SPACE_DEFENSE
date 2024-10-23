@@ -11,7 +11,7 @@ public class PlayerLevelManager : MonoBehaviour
     public float xpToNextLevel = 100; // Kinh nghiệm cần để lên cấp
     [SerializeField] private ExpBar _expBar;
 
-    // Khai báo delegate và event cho level up
+    
 
     // Hàm tăng kinh nghiệm cho player
     public void GainExperience(float amount)

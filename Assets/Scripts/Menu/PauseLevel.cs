@@ -32,65 +32,7 @@ public class PauseLevel : MonoBehaviour
     {
         this.gameObject.SetActive(false);
     }
-    /*   public void RandomlySelectSkills()
-       {
-           List<int> allIDs = new List<int> { 1, 2, 3, 4, 5 };
-
-
-           HashSet<int> selectedIDs = new HashSet<int>();
-           System.Random random = new System.Random();
-
-           while (selectedIDs.Count < 3)
-           {
-               int randomIndex = random.Next(allIDs.Count);
-               selectedIDs.Add(allIDs[randomIndex]);
-           }
-           foreach (int id in allIDs)
-           {
-               if (selectedIDs.Contains(id))
-               {
-                   switch (id)
-                   {
-                       case 1:
-                           skill1.OnOpen();
-                           break;
-                       case 2:
-                           skill2.OnOpen();
-                           break;
-                       case 3:
-                           skill3.OnOpen();
-                           break;
-                       case 4:
-                           skill4.OnOpen();
-                           break;
-                       case 5:
-                           skill5.OnOpen();
-                           break;
-                   }
-               }
-               else
-               {
-                   switch (id)
-                   {
-                       case 1:
-                           skill1.OnClose();
-                           break;
-                       case 2:
-                           skill2.OnClose();
-                           break;
-                       case 3:
-                           skill3.OnClose();
-                           break;
-                       case 4:
-                           skill4.OnClose();
-                           break;
-                       case 5:
-                           skill5.OnClose();
-                           break;
-                   }
-               }
-           }
-       }*/
+   
     public void RandomlySelectSkills()
     {
         // Danh sách các ID kỹ năng có thể random ban đầu
@@ -242,7 +184,7 @@ public class PauseLevel : MonoBehaviour
     {
         UiController.instance.PauseLevel.OnClose();
         GameController.instance.ContinueGame();
-        Debug.Log("ClickSill4");
+        
         if (GameController.instance.SpawnerCurrent.damageZone == null)
             Debug.Log("GameController.instance.SpawnerCurrent. damageZone NULL");
         if (clickCount4 < skill4Levels.Count)
@@ -253,7 +195,6 @@ public class PauseLevel : MonoBehaviour
             GameController.instance.SpawnerCurrent. damageZone.gameObject.SetActive(true);
             GameController.instance.SpawnerCurrent.damageZone.SetRadius(currentSkill4.Radius);
             GameController.instance.SpawnerCurrent.damageZone.damagePerSecond = currentSkill4.damagePerSecond;
-            Debug.Log("ClickSillSussce2" + GameController.instance.SpawnerCurrent.damageZone.damagePerSecond);
             clickCount4++;
         }
         else
