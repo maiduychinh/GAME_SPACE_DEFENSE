@@ -13,7 +13,7 @@ public class Spawner : MonoBehaviour
     public float timeBetweenWay = 5f; // Time delay round
     private int currentWay;
     private int instanceNumber = 1;
-    private int enemiesRemaining = 0; // Số lượng enemy còn lại trong round hiện tại
+    private int enemiesRemaining = 0; 
 
     public Transform TransformSpawn;
 
@@ -25,37 +25,30 @@ public class Spawner : MonoBehaviour
 
         StartCoroutine(SpawnWay());
     }
-
     IEnumerator SpawnWay()
     {
-        while (currentWay < way.Length) // Vòng lặp qua các wave
+        while (currentWay < way.Length) 
         {
-            WaveDataScriptableObject currentWaveData = way[currentWay]; // Lấy dữ liệu của wave hiện tại
-            enemiesRemaining = 0; // Reset lại số lượng enemy cho wave
+            WaveDataScriptableObject currentWaveData = way[currentWay]; 
+            enemiesRemaining = 0; 
 
-            // Spawn các loại enemy trong wave
             for (int enemyTypeIndex = 0; enemyTypeIndex < currentWaveData.enemyTypes.Length; enemyTypeIndex++)
             {
                 EnemyData enemyType = currentWaveData.enemyTypes[enemyTypeIndex];
                 int count = currentWaveData.enemyCounts[enemyTypeIndex];
-                enemiesRemaining += count; // Cập nhật số lượng enemy còn lại trong wave
+                enemiesRemaining += count; 
 
                 for (int i = 0; i < count; i++)
                 {
                     SpawnEntity(enemyType);
-                    yield return new WaitForSeconds(timeBetweenSpawns); // Chờ giữa các lần spawn
+                    yield return new WaitForSeconds(timeBetweenSpawns); 
                 }
             }
-
-            // Chờ cho đến khi tất cả enemy trong wave bị tiêu diệt
             yield return new WaitUntil(() => enemiesRemaining <= 0);
-
-            // Chờ trước khi bắt đầu wave tiếp theo
             yield return new WaitForSeconds(timeBetweenWay);
 
-            currentWay++; // Chuyển sang wave tiếp theo
+            currentWay++; 
         }
-
         GameController.instance.DoWin();
 
     }
@@ -66,30 +59,25 @@ public class Spawner : MonoBehaviour
         {
             return;
         }
-
         Vector3 spawnPosition = GetRandomSpawnPosition();
         GameObject currentEntity = Instantiate(enemyData.enemyPrefab, spawnPosition, Quaternion.identity, TransformSpawn);
         currentEntity.name = enemyData.enemyName + instanceNumber;
         instanceNumber++;
 
-        // Gán dữ liệu EnemyData vào script Enemi
         Enemi enemyScript = currentEntity.GetComponent<Enemi>();
         if (enemyScript != null)
         {
-            enemyScript.enemyData = enemyData; // Gán dữ liệu từ EnemyData
-            enemyScript.OnEnemyDeath += HandleEnemyDeath; // Đăng ký với sự kiện khi enemy chết
+            enemyScript.enemyData = enemyData; 
+            enemyScript.OnEnemyDeath += HandleEnemyDeath; 
         }
         else
         {
         }
     }
-
-    // Xử lý khi enemy chết
     void HandleEnemyDeath(GameObject enemy)
     {
         enemiesRemaining--;
     }
-
     Vector3 GetRandomSpawnPosition()
     {
 

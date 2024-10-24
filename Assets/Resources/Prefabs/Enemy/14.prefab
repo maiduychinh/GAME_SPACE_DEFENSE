@@ -113,7 +113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: d081656a1c5df2d4099eb00f11acafe3, type: 2}
   damageTextPrefab: {fileID: 1965492623807059698, guid: 20a8c54e8552ab245ac1986152fd8e3c, type: 3}
-  textOffsetY: 2
+  textOffsetY: 0
 --- !u!54 &2359464577110657066
 Rigidbody:
   m_ObjectHideFlags: 0

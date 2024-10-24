@@ -49,12 +49,12 @@ public class GameController : MonoBehaviour
     {
         if (currentLevel != null)
         {
-            Destroy(currentLevel);  // Chỉ phá hủy đối tượng đã khởi tạo
+            Destroy(currentLevel); 
             currentLevel = null;   
             Debug.Log("Destroyed current level");
 
         }
-        Resources.UnloadUnusedAssets(); // Giải phóng tài nguyên không dùng nữa
+        Resources.UnloadUnusedAssets(); 
     }
 
     public void DoWin()

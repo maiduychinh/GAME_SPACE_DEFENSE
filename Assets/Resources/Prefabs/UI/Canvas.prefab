@@ -85,7 +85,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &1965492623807059663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,7 +171,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5508524098915637900}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.00000001376}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.2094338, y: 1.4784931, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -180,8 +180,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 54.42, y: 12.86}
-  m_SizeDelta: {x: 102.44, y: 41.14}
+  m_AnchoredPosition: {x: 83.18, y: 14.48}
+  m_SizeDelta: {x: 54.88, y: 43.35}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6259306417481988523
 CanvasRenderer:

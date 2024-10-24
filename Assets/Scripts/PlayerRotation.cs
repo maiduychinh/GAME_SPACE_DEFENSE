@@ -6,75 +6,74 @@ using UnityEngine;
 
 public class PlayerRotation : MonoBehaviour
 {
-    public Transform bulletSpawnPoint; // Điểm phát đạn
-    public GameObject bulletPrefab; // Prefab của viên đạn
-    public float bulletSpeed = 10f; // Tốc độ viên đạn
-    public float shootingRadius = 15f; // Bán kính bắn
-    public float shootingInterval = 1f; // Thời gian giữa các lần bắn
+    public Transform bulletSpawnPoint; 
+    public GameObject bulletPrefab; 
+    public float bulletSpeed = 10f; 
+    public float shootingRadius = 15f; 
+    public float shootingInterval = 1f; 
 
-    private Transform closestEnemy; // Kẻ thù gần nhất
-    private float lastShotTime = 0f; // Thời gian bắn cuối cùng
-    private PlayerLevelManager levelManager; // Quản lý cấp độ của người chơi
-    public GameObject orbitingPrefab; // Prefab của các đối tượng quay quanh
-    public List<GameObject> orbitingObjects = new List<GameObject>(); // Danh sách các đối tượng quay quanh
-    public float orbitRadius = 2f; // Bán kính quỹ đạo
-    public float orbitSpeed = 50f; // Tốc độ quay
+    private Transform _closestEnemy; 
+    private float _lastShotTime = 0f; 
+    private PlayerLevelManager _levelManager; 
+    public GameObject orbitingPrefab; 
+    public List<GameObject> orbitingObjects = new List<GameObject>(); 
+    public float orbitRadius = 2f; 
+    public float orbitSpeed = 50f; 
 
-    public int currentSkillLevel = 0; // Cấp độ hiện tại
+    public int currentSkillLevel = 0; 
 
     void Start()
     {
-        levelManager = GetComponent<PlayerLevelManager>(); // Lấy component quản lý cấp độ
+        _levelManager = GetComponent<PlayerLevelManager>(); 
     }
 
     void Update()
     {
-        closestEnemy = FindClosestEnemy();
+        _closestEnemy = Find_closestEnemy();
 
-        if (closestEnemy != null)
+        if (_closestEnemy != null)
         {
-            float distanceToEnemy = Vector3.Distance(transform.position, closestEnemy.position);
+            float distanceToEnemy = Vector3.Distance(transform.position, _closestEnemy.position);
 
             if (distanceToEnemy <= shootingRadius)
             {
-                Vector3 direction = (closestEnemy.position - transform.position).normalized;
+                Vector3 direction = (_closestEnemy.position - transform.position).normalized;
                 Quaternion rotation = Quaternion.LookRotation(direction);
                 transform.rotation = Quaternion.Euler(0, rotation.eulerAngles.y, 0);
 
-                if (Time.time - lastShotTime > shootingInterval) // Chỉ bắn một lần trong khoảng thời gian nhất định
+                if (Time.time - _lastShotTime > shootingInterval) 
                 {
-                    Shoot(); // Gọi phương thức bắn
-                    lastShotTime = Time.time; // Cập nhật thời gian bắn cuối
+                    Shoot();
+                    _lastShotTime = Time.time; 
                 }
             }
         }
 
-        // Cập nhật vị trí của các prefab bay quanh player
         UpdateOrbitingObjects();
     }
 
-    Transform FindClosestEnemy()
+    Transform Find_closestEnemy()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemi"); // Lấy tất cả kẻ thù
-        float minDistance = Mathf.Infinity; // Khoảng cách tối thiểu
-        Transform nearestEnemy = null; // Kẻ thù gần nhất
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemi"); 
+        float minDistance = Mathf.Infinity;
+        Transform nearestEnemy = null;
 
-        foreach (GameObject enemy in enemies) // Duyệt qua tất cả kẻ thù
+        foreach (GameObject enemy in enemies)
         {
-            float distance = Vector3.Distance(transform.position, enemy.transform.position); // Tính khoảng cách
-            if (distance < minDistance) // Nếu khoảng cách nhỏ hơn khoảng cách tối thiểu
+            float distance = Vector3.Distance(transform.position, enemy.transform.position);
+            if (distance < minDistance) 
             {
-                minDistance = distance; // Cập nhật khoảng cách tối thiểu
-                nearestEnemy = enemy.transform; // Cập nhật kẻ thù gần nhất
+                minDistance = distance;
+                nearestEnemy = enemy.transform; 
             }
         }
 
-        return nearestEnemy; // Trả về kẻ thù gần nhất
+        return nearestEnemy;
     }
 
     public void Shoot()
     {
-        // Kiểm tra chỉ số currentSkillLevel
+        
         if (UiController.instance == null)
         {
             Debug.LogError("UiController.instance is null!");
@@ -90,60 +89,59 @@ public class PlayerRotation : MonoBehaviour
         if (currentSkillLevel < 0 || currentSkillLevel >= UiController.instance.PauseLevel.skill3Levels.Length)
         {
             Debug.LogError("Invalid skill level!");
-            return; // Thoát nếu không hợp lệ
+            return;
         }
 
-        // Lấy số lượng đạn từ Skill hiện tại
+        
         int quantityBullet = UiController.instance.PauseLevel.skill3Levels[currentSkillLevel].quantityBullet;
 
-        if (closestEnemy == null)
+        if (_closestEnemy == null)
         {
             Debug.LogError("No enemy found to shoot at!");
             return;
         }
 
-        float spacing = 1f; // Khoảng cách giữa các viên đạn
-        Vector3 direction = (closestEnemy.position - bulletSpawnPoint.position).normalized; // Hướng đến kẻ thù
+        float spacing = 1f; 
+        Vector3 direction = (_closestEnemy.position - bulletSpawnPoint.position).normalized; 
 
-        for (int i = 0; i < quantityBullet; i++) // Duyệt qua số lượng viên đạn
+        for (int i = 0; i < quantityBullet; i++) 
         {
-            // Tính toán vị trí bắn cho từng viên đạn dựa trên khoảng cách
-            Vector3 spawnPosition = bulletSpawnPoint.position + direction * (i * spacing); // Vị trí phát đạn
-            var bullet = Instantiate(bulletPrefab, spawnPosition, bulletSpawnPoint.rotation); // Tạo viên đạn
-            bullet.GetComponent<Rigidbody>().velocity = direction * bulletSpeed; // Thiết lập vận tốc viên đạn
+            Vector3 spawnPosition = bulletSpawnPoint.position + direction * (i * spacing);
+            var bullet = Instantiate(bulletPrefab, spawnPosition, bulletSpawnPoint.rotation); 
+            bullet.GetComponent<Rigidbody>().velocity = direction * bulletSpeed; 
         }
     }
 
     public void OnEnemyKilled(EnemyData enemyData)
     {
-        levelManager.GainExperience(enemyData.exp); // Cộng kinh nghiệm cho người chơi từ EnemyData
+        _levelManager.GainExperience(enemyData.exp);
     }
 
     public void TrySpawnOrbitingPrefab()
     {
-        if (orbitingObjects.Count < 5) // Nếu số lượng đối tượng quay quanh ít hơn 5
+        if (orbitingObjects.Count < 5) 
         {
-            SpawnOrbitingPrefab(); // Spawn prefab quay quanh
+            SpawnOrbitingPrefab(); 
         }
     }
 
     public void SpawnOrbitingPrefab()
     {
-        Quaternion spawnRotation = Quaternion.Euler(90, 0, 0); // Góc quay
-        GameObject newOrbitingObject = Instantiate(orbitingPrefab, transform.position, spawnRotation, this.transform); // Tạo đối tượng quay quanh
-        orbitingObjects.Add(newOrbitingObject); // Thêm vào danh sách
+        Quaternion spawnRotation = Quaternion.Euler(90, 0, 0); 
+        GameObject newOrbitingObject = Instantiate(orbitingPrefab, transform.position, spawnRotation, this.transform); 
+        orbitingObjects.Add(newOrbitingObject);
     }
 
     private void UpdateOrbitingObjects()
     {
-        for (int i = 0; i < orbitingObjects.Count; i++) // Duyệt qua danh sách các đối tượng quay quanh
+        for (int i = 0; i < orbitingObjects.Count; i++) 
         {
-            if (orbitingObjects[i] != null) // Nếu đối tượng không null
+            if (orbitingObjects[i] != null)
             {
-                float angle = Time.time * orbitSpeed + i * (360f / orbitingObjects.Count); // Tính góc quay
-                float x = transform.position.x + Mathf.Cos(angle * Mathf.Deg2Rad) * orbitRadius; // Tính vị trí x
-                float z = transform.position.z + Mathf.Sin(angle * Mathf.Deg2Rad) * orbitRadius; // Tính vị trí z
-                orbitingObjects[i].transform.position = new Vector3(x, 0.5f, z); // Cập nhật vị trí đối tượng quay
+                float angle = Time.time * orbitSpeed + i * (360f / orbitingObjects.Count);
+                float x = transform.position.x + Mathf.Cos(angle * Mathf.Deg2Rad) * orbitRadius;
+                float z = transform.position.z + Mathf.Sin(angle * Mathf.Deg2Rad) * orbitRadius;
+                orbitingObjects[i].transform.position = new Vector3(x, 0.5f, z);
             }
         }
     }

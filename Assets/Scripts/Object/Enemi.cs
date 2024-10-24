@@ -11,7 +11,7 @@ public class Enemi : MonoBehaviour
 
     public EnemyData enemyData;
     public GameObject damageTextPrefab; // Prefab chứa Text UI
-    public float textOffsetY = 2f; // Khoảng cách để hiển thị text
+    public float textOffsetY = 0f; // Khoảng cách để hiển thị text
 
     void Start()
     {
@@ -78,7 +78,7 @@ public class Enemi : MonoBehaviour
         if (damageTextPrefab != null)
         {
             // Tạo Text UI từ Prefab
-            GameObject damageText = Instantiate(damageTextPrefab, transform.position + new Vector3(0, textOffsetY, 0), Quaternion.identity);
+            GameObject damageText = Instantiate(damageTextPrefab, transform.position + new Vector3(-2, 1, 0), Quaternion.identity);
 
             // Lấy component Text trong Prefab
             Text textComponent = damageText.GetComponentInChildren<Text>();
@@ -93,11 +93,13 @@ public class Enemi : MonoBehaviour
                 Debug.LogError("Text component not found in damageTextPrefab!");
             }
 
-            Destroy(damageText, 0.3f); // Hủy sau 0.1 giây
+            Destroy(damageText, 0.2f); // Hủy sau 0.1 giây
         }
         else
         {
             Debug.LogError("damageTextPrefab is not assigned!");
         }
     }
+    
+
 }
